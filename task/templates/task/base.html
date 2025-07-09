@@ -1,0 +1,30 @@
+{% load static %}          {# enables the {% static %} tag #}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %} ToDO {% endblock %}</title>
+    <link rel="stylesheet" href="{% static 'todo/style.css' %}">
+
+</head>
+<body>
+      <header>
+    <!-- <h1>My ToDo App</h1> -->
+  </header>
+
+  <main>
+    {% block content %}
+    
+    {% endblock %}
+  </main>
+
+  <footer>
+    <p>&copy; 2025 My Site</p>
+  </footer>
+
+<script src="{% static 'todo/script.js' %}"></script>
+
+</body>
+</html>
