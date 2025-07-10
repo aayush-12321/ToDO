@@ -1,7 +1,90 @@
-<h3>Task Form</h3>
+ {% extends 'task/base.html' %}
+ {% load static %}
+{% load widget_tweaks %}
+{% block title %}Create Task{% endblock %}
+{% block style %}
+<link rel="stylesheet" href="{% static 'task/style.css' %}">
+<style>
+    
+
+body {
+  background-color: #f1f4f9;
+  font-family: 'Segoe UI', sans-serif;
+}
+
+form.card {
+  max-width: 500px;
+  margin: 0 auto;
+  background-color: #fff;
+  border-radius: 16px;
+  padding: 2rem;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+}
+
+form.card h4 {
+  font-weight: 600;
+  margin-bottom: 1.5rem;
+  text-align: center;
+  color: #333;
+}
+
+form .form-control {
+  border-radius: 10px;
+  padding: 0.75rem 1rem;
+  border: 1px solid #ccc;
+  transition: 0.3s;
+}
+
+form .form-control:focus {
+  border-color: #4e73df;
+  box-shadow: 0 0 0 0.2rem rgba(78, 115, 223, 0.25);
+}
+
+form .btn {
+  border-radius: 10px;
+  padding: 0.6rem 1.2rem;
+  font-weight: 500;
+  transition: background-color 0.3s ease;
+}
+
+form .btn:hover {
+  background-color: #375ab7;
+} 
+
+</style>
+{% endblock %}
+{% block content %}
+<div class="container mt-5">
+    <form class="card p-4 shadow-lg" method="POST" action="">
+        {% csrf_token %}
+        <h4 class="mb-4 text-center">Create Task</h4>
+
+        <div class="mb-3">
+            <label for="title" class="form-label">{{ form.title.label }}</label>
+            {{ form.title|add_class:"form-control" }}
+        </div>
+
+        <div class="mb-3">
+            <label for="description" class="form-label">{{ form.description.label }}</label>
+            {{ form.description|add_class:"form-control" }}
+        </div>
+
+        <div class="mb-3 form-check">
+            {{ form.complete|add_class:"form-check-input" }}
+            <label for="complete" class="form-check-label">{{ form.complete.label }}</label>
+        </div>
+
+        <input class="btn btn-primary w-100" type="submit" value="Submit">
+    </form>
+</div>
+
+{% endblock %} 
+
+
+<!-- <h3>Task Form</h3>
 <a href="{% url 'tasks' %}">Go Back</a>
 <form method="POST" action="">
     {% csrf_token %}
     {{form.as_p}}
     <input type="submit">
-</form>
+</form>  -->

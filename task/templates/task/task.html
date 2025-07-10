@@ -1,5 +1,17 @@
-<h1>Task: {{task.title}}</h1>
-<br>
-<p>{{task.description}}</p>
-<p>Created at: {{task.created_at}}</p>
+{% extends 'task/base.html' %}
+{% block title %}Create Task{% endblock %}
 
+{% block content %}
+<div class="container mt-5">
+  <div class="card mx-auto" style="width: 18rem;">
+    <div class="card-body">
+      <h5 class="card-title">{{task.title|upper}}</h5>
+      <p class="card-text">{{task.description}}</p>
+      <p class="card-text">{{task.created_at}}</p>
+      <p class="card-text">{% if task.complete %} &#128994;Completed {% else %} &#8709; Remaining{% endif %} </p>
+      <a href="{% url 'tasks'  %}" class="card-link">Go Back</a>
+    </div>
+  </div>
+</div>
+
+{% endblock %}

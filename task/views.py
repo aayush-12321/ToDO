@@ -9,6 +9,7 @@ from django.urls import reverse_lazy
 from .models import Task
 from django.contrib.auth.views import LoginView, LogoutView
 from django.db.models import Q
+from django.contrib import messages
 
 from django.contrib.auth.mixins import LoginRequiredMixin
 # Create your views here.
@@ -50,13 +51,19 @@ class TaskCreate(LoginRequiredMixin, CreateView):
 
     def form_valid(self, form):
         form.instance.user = self.request.user
+        messages.success(self.request, "✅ Task created successfully!")
         # return super(TaskCreate,self).form_valid(form)
         return super().form_valid(form)
 
 class TaskUpdate(LoginRequiredMixin, UpdateView):
     model = Task
-    fields = '__all__'
+    fields = ['title', 'description', 'complete'] 
     success_url = reverse_lazy('tasks')
+
+    def form_valid(self, form):
+        messages.success(self.request, "✏️ Task updated successfully!")
+        return super().form_valid(form)
+
 
 class TaskDelete(LoginRequiredMixin, DeleteView):
     model = Task
@@ -64,6 +71,12 @@ class TaskDelete(LoginRequiredMixin, DeleteView):
     success_url = reverse_lazy('tasks')
     template_name = 'task/task_delete.html'
 
+    def delete(self, request, *args, **kwargs):
+        print("Deleting task...")
+        messages.success(self.request, "Task deleted successfully ✅")
+        response = super().delete(request, *args, **kwargs)
+        return response
+    
 class RegisterPage(FormView):
     template_name = 'task/register.html'
     form_class = UserCreationForm

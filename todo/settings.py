@@ -40,6 +40,8 @@ INSTALLED_APPS = [
     
     # Custom apps
     'task.apps.TaskConfig',
+
+    'widget_tweaks',
 ]
 
 MIDDLEWARE = [
@@ -119,8 +121,8 @@ LOGIN_URL = 'login'  # Redirect to login page if not authenticated
 # https://docs.djangoproject.com/en/5.2/howto/static-files/
 
 STATIC_URL = 'static/'
-# STATICFILES_DIRS = [ BASE_DIR / "static" ]  # global 'static' folder (optional)
-# STATIC_ROOT = BASE_DIR / 'staticfiles'  # for production use
+STATICFILES_DIRS = [ BASE_DIR / "static" ]  # global 'static' folder (optional)
+STATIC_ROOT = BASE_DIR / 'staticfiles'  # for production use
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
